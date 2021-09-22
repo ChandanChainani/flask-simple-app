@@ -81,7 +81,7 @@ def add_theatres():
         Theatre.add(theatre_name, seats)
         return jsonify({
             "message": "Theatre added successfully"
-        }), 302
+        }), 201
     except Exception as e:
         print(e)
         return jsonify({
