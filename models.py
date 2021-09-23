@@ -98,8 +98,15 @@ class Booking(object):
 
 class Theatre_Bookings(object):
     @classmethod
+    def seats_left(cls, name):
+        booked_seats = 0
+        if Booking.exists(name):
+            booked_seats = Booking.table[name]["seats"]
+        return Theatre.exists(name) and (Theatre.get(name)["seats"] - booked_seats)
+
+    @classmethod
     def isBooked(cls, name):
-        return Theatre.exists(name) and Booking.exists(name) and (Theatre.get(name)["seats"] - Booking.table[name]["seats"]) == 0
+        return cls.seats_left(name) == 0
 
 
 User.seed()

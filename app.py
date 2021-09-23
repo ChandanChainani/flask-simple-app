@@ -55,6 +55,28 @@ def list_theatres(name):
         }), 500
 
 
+@app.route('/theatres/<name>/seats')
+def left_seats(name):
+    theatre = Theatre.get(name)
+    if theatre == {}:
+        return jsonify({
+            "message": "Theatre not found"
+        }), 200
+
+    return jsonify({
+        "data": {
+            "seats": Theatre_Bookings.seats_left(name)
+        }
+    }), 200
+    try:
+        pass
+    except Exception as e:
+        print(e)
+        return jsonify({
+            "message": "Internal server error."
+        }), 500
+
+
 @app.route('/theatre/new', methods=['POST'])
 @jwt_required()
 @is_role(ADMIN)
