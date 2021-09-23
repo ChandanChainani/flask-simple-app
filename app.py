@@ -1,16 +1,11 @@
 from flask import Flask, request, jsonify
 from flask_jwt import JWT, jwt_required, current_identity
 from werkzeug.security import safe_str_cmp
-import os, sys, datetime
+import datetime
 from functools import wraps
 
-from constants import ADMIN, CUSTOMER
+from constants import SECRET_KEY, ADMIN, CUSTOMER
 from models import User, Theatre, Booking, Theatre_Bookings
-
-SECRET_KEY = os.environ.get("SECRET_KEY", None)
-if SECRET_KEY == None:
-    print("No SECRET_KEY key found")
-    sys.exit(1)
 
 def authenticate(username, password):
     user = User.table.get(username, None)
