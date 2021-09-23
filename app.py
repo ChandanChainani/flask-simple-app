@@ -123,7 +123,7 @@ def add_bookings():
             "message": "Theatre with name not exists"
         }), 200
 
-    if Theatre_Bookings.isBooked(theatre_name):
+    if Theatre_Bookings.is_booked(theatre_name):
         return jsonify({
             "message": "Sorry no seat left"
         }), 200

@@ -105,7 +105,7 @@ class Theatre_Bookings(object):
         return Theatre.exists(name) and (Theatre.get(name)["seats"] - booked_seats)
 
     @classmethod
-    def isBooked(cls, name):
+    def is_booked(cls, name):
         return cls.seats_left(name) == 0
 
 
