@@ -128,6 +128,12 @@ def add_bookings():
             "message": "Sorry no seat left"
         }), 200
 
+    seats_left = Theatre_Bookings.seats_left(theatre_name)
+    if seats_left < book_seats:
+        return jsonify({
+            "message": f"Sorry only {seats_left} seats left"
+        }), 200
+
     if Booking.add(current_identity.id, theatre_name, book_seats):
         return jsonify({
             "message": "Seats booked successfully"
